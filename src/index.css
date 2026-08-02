@@ -8,10 +8,26 @@
   --amber: #e8944a;
   --text: #edeff3;
   --text-dim: #8a919e;
+  --nav-bg: rgba(12, 14, 18, 0.7);
 
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+}
+
+[data-theme='light'] {
+  --bg: #f6f5f1;
+  --panel: #ffffff;
+  --panel-line: #e2e0d8;
+  --teal: #0c9c8c;
+  --amber: #c56f22;
+  --text: #14171c;
+  --text-dim: #5b616b;
+  --nav-bg: rgba(246, 245, 241, 0.75);
+}
+
+body {
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 * {

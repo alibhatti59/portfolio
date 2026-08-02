@@ -14,10 +14,11 @@ Opens at http://localhost:5173
 
 ## Edit content
 
-All copy lives in `src/App.jsx`:
-- `AUTOMATION_WORK` — automation/voice-agent case studies
-- `FULLSTACK_WORK` — Flutter/WordPress/full-stack projects
-- `STACK_LAYERS` — skills grouped by layer
+Site is now multi-page (React Router):
+- `src/pages/Home.jsx` — hero, automation work, full-stack work, stack (`AUTOMATION_WORK`, `FULLSTACK_WORK`, `STACK_LAYERS`)
+- `src/pages/About.jsx` — bio + certifications (`CERTIFICATIONS`)
+- `src/pages/Contact.jsx` — links (`LINKS` — WhatsApp Business number still needs to be added here)
+- `src/components/Nav.jsx` — top navigation
 
 Colors and fonts are design tokens in `src/index.css` (`:root` variables).
 The 3D hero scene is in `src/PipelineScene.jsx`.
