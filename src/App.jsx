@@ -1,10 +1,18 @@
-import { Suspense, useState, useEffect, lazy } from 'react';
+import { Suspense, lazy, useState, useEffect } from 'react';
 import Spotlight from './components/Spotlight';
 import Reveal from './components/Reveal';
 import ProjectCard from './components/ProjectCard';
 import ContactIcon from './components/ContactIcon';
 import Preloader from './components/Preloader';
+import ErrorBoundary from './components/ErrorBoundary';
 import CustomCursor from './components/CustomCursor';
+import IntroLoader from './components/IntroLoader';
+import FloatingElements from './components/FloatingElements';
+import Magnetic from './components/Magnetic';
+import FlipCard from './components/FlipCard';
+import { fireBurst } from './utils/burst';
+import ParticleField from './components/ParticleField';
+import OrbitVisual from './components/OrbitVisual';
 import profilePic from './assets/profile.jpeg';
 import './App.css';
 
@@ -16,22 +24,22 @@ const AUTOMATION_WORK = [
     icon: 'phone',
     node: 'Vapi + n8n',
     title: 'AI Voice Agent: Appointment Booking System',
-    desc: 'A fully automated AI voice agent that answers real phone calls, holds a natural conversation, and books real appointments directly to Google Calendar — no human involvement.',
+    desc: 'A fully automated AI voice agent that answers real phone calls, holds a natural conversation, and books real appointments directly to Google Calendar, no human involvement.',
     stack: ['Vapi', 'n8n', 'Python', 'FastAPI', 'Google Calendar API'],
     github: 'https://github.com/alibhatti59/voice-agent-booking-api',
     flow: ['Inbound Call', 'Vapi Voice AI', 'n8n Workflow', 'FastAPI Backend', 'Google Calendar'],
-    tradeoff: 'Handled date validation and error cases in the backend instead of trusting the voice layer to confirm bookings — the system fails gracefully on missing or unclear details rather than falsely confirming an appointment that was never actually booked.',
+    tradeoff: 'Handled date validation and error cases in the backend instead of trusting the voice layer to confirm bookings. The system fails gracefully on missing or unclear details rather than falsely confirming an appointment that was never actually booked.',
   },
   {
     id: 'lead-qualification',
     icon: 'spark',
     node: 'n8n + Gemini',
     title: 'AI Lead Qualification & Auto-Booking Agent',
-    desc: 'Instantly qualifies incoming leads and responds before they lose interest. Google Gemini reads each submission and scores it Hot, Warm, or Cold — hot leads get auto-booked against real calendar availability, warm and cold leads get a personalized follow-up email instead of silence.',
+    desc: 'Instantly qualifies incoming leads and responds before they lose interest. Google Gemini reads each submission and scores it Hot, Warm, or Cold, hot leads get auto-booked against real calendar availability, warm and cold leads get a personalized follow-up email instead of silence.',
     stack: ['n8n', 'Google Gemini', 'GoHighLevel'],
     github: 'https://github.com/alibhatti59/ai-lead-qualification-agent',
     flow: ['Form Submission', 'Gemini Scoring', 'Hot / Warm / Cold', 'Auto-Book or Follow-up', 'GHL CRM'],
-    tradeoff: 'Built in duplicate-booking prevention and automatic retries on failure with alerts on breakage — a lead-scoring system is only useful if it fails loudly instead of silently losing a lead.',
+    tradeoff: 'Built in duplicate-booking prevention and automatic retries on failure with alerts on breakage. A lead-scoring system is only useful if it fails loudly instead of silently losing a lead.',
   },
 ];
 
@@ -39,7 +47,7 @@ const FULLSTACK_WORK = [
   {
     id: 'titanic-ml',
     icon: 'chart',
-    title: 'Titanic Survival Prediction — Python & Machine Learning',
+    title: 'Titanic Survival Prediction: Python & Machine Learning',
     desc: 'End-to-end ML app predicting Titanic passenger survival: data preprocessing, feature engineering, and three trained classification models (Logistic Regression, Decision Tree, KNN), evaluated on Accuracy, Precision, Recall, F1, and ROC-AUC. Logistic Regression performed best and was deployed in an interactive Streamlit app for real-time predictions.',
     stack: ['Python', 'Scikit-learn', 'Streamlit', 'NumPy'],
     github: 'https://github.com/alibhatti59/Titanic-Survival-Prediction-AI-Python',
@@ -47,8 +55,8 @@ const FULLSTACK_WORK = [
   {
     id: 'flywise',
     icon: 'plane',
-    title: 'FlyWise — Airline Management System',
-    desc: 'A C# WinForms desktop app managing core airline operations: role-based access control for Admin and Passenger workflows, dynamic flight and passenger management, ticket booking with seat-availability validation, and SQL Server LocalDB integration — built on a 3-tier architecture separating presentation, business logic, and data access.',
+    title: 'FlyWise: Airline Management System',
+    desc: 'A C# WinForms desktop app managing core airline operations: role-based access control for Admin and Passenger workflows, dynamic flight and passenger management, ticket booking with seat-availability validation, and SQL Server LocalDB integration. Built on a 3-tier architecture separating presentation, business logic, and data access.',
     stack: ['C#', 'WinForms', 'SQL Server', '.NET'],
     github: 'https://github.com/alibhatti59/Airline-Management-System-CSharp',
   },
@@ -62,7 +70,7 @@ const STACK_LAYERS = [
   { layer: 'Mobile & Systems', icon: 'device', items: ['Flutter', 'Dart', 'Mobile App Development', 'C++', 'Assembly Language'] },
 ];
 
-const STACK_INTRO = "I work across the stack — from automation and backend APIs to data-driven applications and web development. On the automation side, I build AI agents and intelligent workflows using n8n, GoHighLevel, and Vapi, backed by Python and REST APIs (including FastAPI) — I've also worked with Model Context Protocol (MCP) to connect AI systems like Claude to real tools and data. For backend and systems work, I use Python, C#, PHP, and the .NET Framework with object-oriented design to keep things maintainable. On the data side, Machine Learning, NumPy, and SQL/Azure Data Studio handle analysis and database-driven projects. On the web side, I build and customize WordPress and WooCommerce sites with a focus on clean design and SEO, plus Python-based web scraping — and I build mobile apps with Flutter and Dart, with a systems-level foundation in C++ and Assembly.";
+const STACK_INTRO = "I work across the stack, from AI agents and automation to backend APIs, data, and full web and mobile builds. The full breakdown is below.";
 
 const CERTIFICATIONS = [
   { name: 'Model Context Protocol (MCP): Hands-On with Agentic AI', issuer: 'LinkedIn Learning' },
@@ -74,13 +82,45 @@ const CERTIFICATIONS = [
   { name: 'SEO (Search Engine Optimization)', issuer: 'DigiSkills.pk' },
 ];
 
+const JOURNEY = [
+  { label: 'Flutter' },
+  { label: 'Web Dev' },
+  { label: 'Python' },
+  { label: 'REST APIs' },
+  { label: 'AI Automation' },
+  { label: 'Full Stack', state: 'progress' },
+];
+
+const WHY_ME = [
+  {
+    title: 'You talk to me, not an account manager',
+    desc: "No middlemen, no handoffs. I scope the project, build it, and I'm the one you message when something needs a change.",
+    proof: 'Every project on this site, I built and maintain personally, start to finish.',
+  },
+  {
+    title: 'Honest scoping',
+    desc: "If automation isn't actually the right fix for your problem, I'll tell you before you pay for it. Not every process needs a workflow built around it.",
+    proof: "I'd rather lose a project than build you something you don't actually need.",
+  },
+  {
+    title: 'Fast turnaround',
+    desc: 'Most automations go from first conversation to a live, working system in days, not months. You see progress early, not at the end.',
+    proof: 'You get a working version to react to early, not a big reveal at the end.',
+  },
+  {
+    title: 'You own everything',
+    desc: 'Every workflow, integration, and system I build is yours. No lock-in, no dependency on me to keep it running.',
+    proof: 'Full access, full documentation. If you want to move on, everything moves with you.',
+  },
+];
+
 const CONTACT_LINKS = [
   { label: 'Email', value: 'thealibhatti.dev@gmail.com', href: 'mailto:thealibhatti.dev@gmail.com' },
   { label: 'LinkedIn', value: 'linkedin.com/in/ali-hassnain-bhatti-1a0506312', href: 'https://www.linkedin.com/in/ali-hassnain-bhatti-1a0506312/' },
   { label: 'GitHub', value: 'github.com/alibhatti59', href: 'https://github.com/alibhatti59' },
   { label: 'YouTube', value: '@SmartUse_Tech_byAli', href: 'https://www.youtube.com/@SmartUse_Tech_byAli' },
   { label: 'Facebook', value: 'facebook.com/alibhatti59dev', href: 'https://www.facebook.com/alibhatti59dev/' },
-  { label: 'WhatsApp', value: '03177336159', href: 'https://wa.me/03177336159' },
+  { label: 'WhatsApp', value: '+92 317 7336159', href: 'https://wa.me/923177336159' },
 ];
 
 function NavBar() {
@@ -117,6 +157,18 @@ function NavBar() {
         ))}
       </nav>
       <div className="nav-actions">
+        <a
+          href="https://www.linkedin.com/in/ali-hassnain-bhatti-1a0506312/"
+          target="_blank"
+          rel="noreferrer"
+          className="nav-linkedin"
+          aria-label="LinkedIn"
+        >
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M4.98 3.5a2.5 2.5 0 11.02 5 2.5 2.5 0 01-.02-5zM3 8.98h4v12H3v-12zM9.5 8.98h3.8v1.64h.05c.53-.99 1.82-2.03 3.75-2.03 4.01 0 4.75 2.64 4.75 6.07v6.32h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96v5.7h-4v-12z" />
+          </svg>
+          <span>LinkedIn</span>
+        </a>
         <button className="theme-toggle" onClick={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))} aria-label="Toggle theme">
           <span className={`toggle-track${theme === 'light' ? ' is-light' : ''}`}>
             <span className="toggle-thumb">
@@ -150,6 +202,9 @@ export default function App() {
 
   return (
     <>
+      <IntroLoader />
+      <FloatingElements />
+      <ParticleField />
       <Spotlight />
       <CustomCursor />
       <NavBar />
@@ -157,7 +212,9 @@ export default function App() {
       <section id="top" className="hero">
         <div className="hero-canvas">
           <Suspense fallback={<Preloader />}>
-            <PipelineScene />
+            <ErrorBoundary>
+              <PipelineScene />
+            </ErrorBoundary>
           </Suspense>
         </div>
         <div className="hero-content hero-split">
@@ -166,17 +223,27 @@ export default function App() {
             <div className="hero-photo-glow" />
           </div>
           <div>
-            <p className="eyebrow">Python Developer · AI Automation</p>
+            <p className="eyebrow">AI Automation for Growing Businesses</p>
             <h1>Ali Bhatti</h1>
+            <p className="hero-hook">
+              I help businesses stop losing leads to slow follow-up and missed calls.
+            </p>
             <p className="hero-sub">
-              Specializing in AI automation — n8n, Make, Vapi, GoHighLevel — plus
-              REST APIs and WordPress. Explore the projects below or reach out to
-              start one of your own.
+              I build AI voice agents and automations, GoHighLevel, Vapi, Make, n8n,
+              that answer every call and follow up with every lead, day or night.
+              Explore the work below or tell me what's eating your time.
             </p>
             <div className="hero-links">
-              <a href="#work" className="btn-primary">See the work</a>
-              <a href="#contact" className="btn-ghost">Start a project</a>
-              <a href="/resume.pdf" download className="btn-ghost">Download Résumé</a>
+              <Magnetic><a href="#work" className="btn-primary" data-cursor="OPEN">See the work</a></Magnetic>
+              <Magnetic><a href="#contact" className="btn-ghost" data-cursor="OPEN" onClick={(e) => fireBurst(e.clientX, e.clientY)}>Start a project</a></Magnetic>
+            </div>
+            <div className="hero-core-caption">
+              <span className="tag">Python</span>
+              <span className="tag">API</span>
+              <span className="tag">LLM</span>
+              <span className="tag">n8n</span>
+              <span className="tag">Vapi</span>
+              <span className="tag">MCP</span>
             </div>
           </div>
         </div>
@@ -184,7 +251,7 @@ export default function App() {
       </section>
 
       <section id="work" className="section">
-        <Reveal><p className="section-eyebrow">Automation — the lead</p></Reveal>
+        <Reveal><p className="section-eyebrow">Automation, the lead</p></Reveal>
         <Reveal delay={80}><h2>Systems that run the pipeline</h2></Reveal>
         <div className="work-grid">
           {AUTOMATION_WORK.map((w, i) => (
@@ -213,6 +280,9 @@ export default function App() {
         <Reveal delay={100}>
           <p className="hero-sub stack-intro">{STACK_INTRO}</p>
         </Reveal>
+        <Reveal delay={140}>
+          <OrbitVisual />
+        </Reveal>
         <div className="layers">
           {STACK_LAYERS.map((l, i) => (
             <Reveal key={l.layer} delay={i * 80}>
@@ -230,6 +300,20 @@ export default function App() {
         </div>
       </section>
 
+      <section className="section">
+        <Reveal><p className="section-eyebrow">Journey</p></Reveal>
+        <Reveal delay={80}><h2>How I got to automation</h2></Reveal>
+        <div className="journey-path">
+          {JOURNEY.map((step, i) => (
+            <Reveal key={step.label} delay={i * 90} className="journey-step">
+              <span className={`journey-node${step.state === 'progress' ? ' journey-node-progress' : ''}`} />
+              <span className="journey-label">{step.label}</span>
+              {i < JOURNEY.length - 1 && <span className="journey-connector" />}
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       <section id="about" className="section about">
         <Reveal><p className="section-eyebrow">About</p></Reveal>
         <Reveal delay={80}><h2>Practical digital solutions, built end to end</h2></Reveal>
@@ -241,20 +325,20 @@ export default function App() {
             <p>
               I build practical digital solutions that combine creativity, logic, and
               functionality. My background spans Flutter and web development, where
-              I've shipped modern, user-focused apps and websites — and more recently,
+              I've shipped modern, user-focused apps and websites, and more recently,
               I've been going deep on AI automation.
             </p>
             <p>
               Right now, most of my work centers on connecting Python, REST APIs, and
               platforms like Make.com, n8n, GoHighLevel, and Vapi into intelligent
-              workflows — systems that qualify leads, book appointments, and take
+              workflows, systems that qualify leads, book appointments, and take
               repetitive work off people's plates. I like the problem that automation
               solves: turning a process that used to need a person watching it into
               one that just runs.
             </p>
             <p>
               On the technical side, I work across Python, Flutter (Dart), C++, C#,
-              SQL, HTML, CSS, JavaScript, and even Assembly Language — a mix that's
+              SQL, HTML, CSS, JavaScript, and even Assembly Language, a mix that's
               given me a solid foundation for whatever a project needs, from a CRM
               integration to a full website build.
             </p>
@@ -263,7 +347,7 @@ export default function App() {
               real-world projects, I've built up problem-solving skills, technical
               confidence, and an eye for delivering things that actually work
               reliably, not just in a demo. Long-term, I'm working toward full-stack
-              development — pairing the automation and backend work I do now with
+              development, pairing the automation and backend work I do now with
               stronger front-end range.
             </p>
             <p>
@@ -284,6 +368,24 @@ export default function App() {
             ))}
           </ul>
         </Reveal>
+      </section>
+
+      <section className="section">
+        <Reveal><p className="section-eyebrow">Why work with me</p></Reveal>
+        <Reveal delay={80}><h2>What you get when you hire me</h2></Reveal>
+        <Reveal delay={110}>
+          <p className="hero-hook why-hook">
+            Your competitors respond to leads in minutes. If you're still doing it
+            manually, you're already behind.
+          </p>
+        </Reveal>
+        <div className="work-grid">
+          {WHY_ME.map((w, i) => (
+            <Reveal key={w.title} delay={i * 90 + 140}>
+              <FlipCard front={w.title} desc={w.desc} back={w.proof} />
+            </Reveal>
+          ))}
+        </div>
       </section>
 
       <section id="contact" className="section contact-page">

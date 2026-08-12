@@ -1,22 +1,27 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function CustomCursor() {
   const dotRef = useRef(null);
+  const [label, setLabel] = useState('');
 
   useEffect(() => {
-    if (window.matchMedia('(pointer: coarse)').matches) return; // skip on touch devices
+    if (window.matchMedia('(pointer: coarse)').matches) return;
 
     const dot = dotRef.current;
     const onMove = (e) => {
       dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
     };
     const onOver = (e) => {
-      if (e.target.closest('a, button, .work-card, .tag')) {
+      const el = e.target.closest('[data-cursor]');
+      if (el) {
+        setLabel(el.dataset.cursor);
         dot.classList.add('cursor-hover');
       }
     };
     const onOut = (e) => {
-      if (e.target.closest('a, button, .work-card, .tag')) {
+      const el = e.target.closest('[data-cursor]');
+      if (el) {
+        setLabel('');
         dot.classList.remove('cursor-hover');
       }
     };
@@ -34,5 +39,9 @@ export default function CustomCursor() {
     };
   }, []);
 
-  return <div ref={dotRef} className="custom-cursor" />;
+  return (
+    <div ref={dotRef} className="custom-cursor">
+      {label && <span className="cursor-label">{label}</span>}
+    </div>
+  );
 }

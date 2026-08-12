@@ -1,3 +1,6 @@
+import Waveform from './Waveform';
+import ChatFlow from './ChatFlow';
+
 const ICONS = {
   phone: (
     <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="1.6">
@@ -42,9 +45,15 @@ function CircuitPattern({ id }) {
 
 export default function ProjectCard({ w, isOpen, onToggle }) {
   return (
-    <article className={`work-card${isOpen ? ' is-open' : ''}`}>
+    <article className={`work-card${isOpen ? ' is-open' : ''}`} data-cursor="VIEW">
       <div className={`card-cover cover-${w.icon}`}>
         <CircuitPattern id={w.id} />
+        {w.icon === 'plane' && (
+          <svg className="plane-fly" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <path d="M22 2L11 13" />
+            <path d="M22 2l-7 20-4-9-9-4z" />
+          </svg>
+        )}
         <span className="card-cover-icon">{ICONS[w.icon]}</span>
       </div>
       <div className="card-body">
@@ -62,7 +71,7 @@ export default function ProjectCard({ w, isOpen, onToggle }) {
             </button>
           )}
           {w.github && (
-            <a className="github-link" href={w.github} target="_blank" rel="noreferrer">
+            <a className="github-link" href={w.github} target="_blank" rel="noreferrer" data-cursor="CODE">
               View on GitHub ↗
             </a>
           )}
@@ -70,6 +79,8 @@ export default function ProjectCard({ w, isOpen, onToggle }) {
         {w.flow && (
           <div className={`case-panel${isOpen ? ' open' : ''}`}>
             <div className="case-panel-inner">
+              {w.icon === 'phone' && <Waveform />}
+              {w.icon === 'spark' && <ChatFlow />}
               <div className="flow-diagram">
                 {w.flow.map((step, i) => (
                   <span className="flow-step" key={step}>

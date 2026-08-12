@@ -35,8 +35,18 @@ const GLYPHS = {
   ),
 };
 
+const BRAND_COLORS = {
+  Email: '#2fd9c4',
+  LinkedIn: '#0a66c2',
+  GitHub: '#e6e8eb',
+  YouTube: '#ff3b3b',
+  Facebook: '#1877f2',
+  WhatsApp: '#25d366',
+};
+
 export default function ContactIcon({ label, value, href }) {
   const ref = useRef(null);
+  const brand = BRAND_COLORS[label];
 
   const onMove = (e) => {
     const el = ref.current;
@@ -44,8 +54,8 @@ export default function ContactIcon({ label, value, href }) {
     const rect = el.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
-    el.style.setProperty('--ry', `${x * 16}deg`);
-    el.style.setProperty('--rx', `${-y * 16}deg`);
+    el.style.setProperty('--ry', `${x * 14}deg`);
+    el.style.setProperty('--rx', `${-y * 14}deg`);
   };
 
   const onLeave = () => {
@@ -57,8 +67,8 @@ export default function ContactIcon({ label, value, href }) {
 
   const content = (
     <>
-      <span className="contact-icon-glow" />
-      <span className="contact-icon-glyph">{GLYPHS[label]}</span>
+      <span className="contact-icon-glow" style={{ background: `radial-gradient(circle, ${brand}33, transparent 70%)` }} />
+      <span className="contact-icon-glyph" style={{ color: brand }}>{GLYPHS[label]}</span>
       <span className="contact-icon-label">{label}</span>
       {value ? <span className="contact-icon-value">{value}</span> : <span className="contact-icon-value empty">add your number</span>}
     </>
@@ -66,7 +76,7 @@ export default function ContactIcon({ label, value, href }) {
 
   if (!href) {
     return (
-      <div ref={ref} className="contact-tilt contact-tilt-empty">
+      <div ref={ref} className="contact-tilt contact-tilt-empty" style={{ '--brand': brand }}>
         {content}
       </div>
     );
@@ -79,6 +89,8 @@ export default function ContactIcon({ label, value, href }) {
       target="_blank"
       rel="noreferrer"
       className="contact-tilt"
+      style={{ '--brand': brand }}
+      data-cursor="OPEN"
       onMouseMove={onMove}
       onMouseLeave={onLeave}
     >
