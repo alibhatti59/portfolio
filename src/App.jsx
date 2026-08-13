@@ -1,5 +1,6 @@
 import { Suspense, lazy, useState, useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Spotlight from './components/Spotlight';
 import Reveal from './components/Reveal';
 import ProjectCard from './components/ProjectCard';
@@ -410,6 +411,7 @@ export default function App() {
           ))}
         </div>
       </section>
+      <SpeedInsights />
     </>
   );
 }
