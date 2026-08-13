@@ -1,4 +1,5 @@
 import { Suspense, lazy, useState, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Spotlight from './components/Spotlight';
 import Reveal from './components/Reveal';
 import ProjectCard from './components/ProjectCard';
@@ -202,6 +203,7 @@ export default function App() {
 
   return (
     <>
+      <Analytics />
       <IntroLoader />
       <FloatingElements />
       <ParticleField />
