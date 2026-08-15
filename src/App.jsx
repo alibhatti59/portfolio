@@ -151,7 +151,7 @@ function NavBar() {
   return (
     <header className={`nav${scrolled ? ' scrolled' : ''}`}>
       <a href="#top" className="nav-brand" onClick={() => setMenuOpen(false)}>
-        <img src={profilePic} alt="Ali Bhatti" className="nav-avatar" />
+        <img src={profilePic} alt="Ali Hassnain Bhatti" className="nav-avatar" />
         <span className="nav-brand-text">Ali Bhatti</span>
       </a>
       <nav className={`nav-links${menuOpen ? ' open' : ''}`}>
@@ -224,12 +224,12 @@ export default function App() {
         </div>
         <div className="hero-content hero-split">
           <div className="hero-photo-wrap">
-            <img src={profilePic} alt="Ali Bhatti" className="hero-photo" />
+            <img src={profilePic} alt="Ali Hassnain Bhatti" className="hero-photo" />
             <div className="hero-photo-glow" />
           </div>
           <div>
             <p className="eyebrow">AI Automation for Growing Businesses</p>
-            <h1>Ali Bhatti</h1>
+            <h1>Ali Hassnain Bhatti</h1>
             <p className="hero-hook">
               I help businesses stop losing leads to slow follow-up and missed calls.
             </p>
@@ -246,9 +246,12 @@ export default function App() {
               <span className="tag">Python</span>
               <span className="tag">API</span>
               <span className="tag">LLM</span>
+              <span className="tag">CRM</span>
               <span className="tag">n8n</span>
-              <span className="tag">Vapi</span>
-              <span className="tag">MCP</span>
+              <span className="tag">Make</span>
+              <span className="tag">Zapier</span>
+              <span className="tag">GoHighLevel</span>
+              <span className="tag">WordPress</span>
             </div>
           </div>
         </div>
@@ -329,15 +332,19 @@ export default function App() {
         <Reveal delay={80}><h2>Practical digital solutions, built end to end</h2></Reveal>
         <div className="about-layout">
           <Reveal className="about-photo-reveal">
-            <img src={profilePic} alt="Ali Bhatti" className="about-photo" />
+            <img src={profilePic} alt="Ali Hassnain Bhatti" className="about-photo" />
           </Reveal>
           <Reveal delay={100} className="about-body">
             <p>
-              I build practical digital solutions that combine creativity, logic, and
-              functionality, spanning Flutter and web development, and more recently,
-              AI automation: connecting Python, REST APIs, and platforms like
-              Make.com, n8n, GoHighLevel, and Vapi into workflows that qualify leads,
-              book appointments, and take repetitive work off people's plates.
+              I’m Ali Hassnain Bhatti, a Python Developer and AI Automation Specialist
+              focused on building practical digital solutions that automate processes,
+              connect systems, and improve business efficiency.
+            </p>
+            <p>
+              I work with tools and technologies including Python, FastAPI, REST APIs, n8n,
+              Make, Zapier, webhooks, Vapi, CRM integrations, and AI agents to design reliable
+              automation workflows and backend systems. I also build responsive websites and
+              business solutions using WordPress, WooCommerce, HTML, CSS, and JavaScript.
             </p>
             <p>
               My stack includes Python, Flutter (Dart), C++, C#, SQL, HTML, CSS,
