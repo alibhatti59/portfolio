@@ -1,6 +1,4 @@
 import { Suspense, lazy, useState, useEffect } from 'react';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
 import Spotlight from './components/Spotlight';
 import Reveal from './components/Reveal';
 import ProjectCard from './components/ProjectCard';
@@ -15,6 +13,9 @@ import FlipCard from './components/FlipCard';
 import { fireBurst } from './utils/burst';
 import ParticleField from './components/ParticleField';
 import OrbitVisual from './components/OrbitVisual';
+import ScrollRail from './components/ScrollRail';
+import SectionIndex from './components/SectionIndex';
+import BackToTop from './components/BackToTop';
 import profilePic from './assets/profile.jpeg';
 import './App.css';
 
@@ -204,11 +205,12 @@ export default function App() {
 
   return (
     <>
-      <Analytics />
       <IntroLoader />
       <FloatingElements />
       <ParticleField />
       <Spotlight />
+      <ScrollRail />
+      <BackToTop />
       <CustomCursor />
       <NavBar />
 
@@ -254,6 +256,7 @@ export default function App() {
       </section>
 
       <section id="work" className="section">
+        <SectionIndex number="01" />
         <Reveal><p className="section-eyebrow">Automation, the lead</p></Reveal>
         <Reveal delay={80}><h2>Systems that run the pipeline</h2></Reveal>
         <div className="work-grid">
@@ -266,6 +269,7 @@ export default function App() {
       </section>
 
       <section className="section">
+        <SectionIndex number="02" />
         <Reveal><p className="section-eyebrow">Full-stack range</p></Reveal>
         <Reveal delay={80}><h2>Beyond the pipeline</h2></Reveal>
         <div className="work-grid">
@@ -278,6 +282,7 @@ export default function App() {
       </section>
 
       <section className="section">
+        <SectionIndex number="03" />
         <Reveal><p className="section-eyebrow">Stack</p></Reveal>
         <Reveal delay={80}><h2>What runs underneath</h2></Reveal>
         <Reveal delay={100}>
@@ -304,6 +309,7 @@ export default function App() {
       </section>
 
       <section className="section">
+        <SectionIndex number="04" />
         <Reveal><p className="section-eyebrow">Journey</p></Reveal>
         <Reveal delay={80}><h2>How I got to automation</h2></Reveal>
         <div className="journey-path">
@@ -318,6 +324,7 @@ export default function App() {
       </section>
 
       <section id="about" className="section about">
+        <SectionIndex number="05" />
         <Reveal><p className="section-eyebrow">About</p></Reveal>
         <Reveal delay={80}><h2>Practical digital solutions, built end to end</h2></Reveal>
         <div className="about-layout">
@@ -327,31 +334,16 @@ export default function App() {
           <Reveal delay={100} className="about-body">
             <p>
               I build practical digital solutions that combine creativity, logic, and
-              functionality. My background spans Flutter and web development, where
-              I've shipped modern, user-focused apps and websites, and more recently,
-              I've been going deep on AI automation.
+              functionality, spanning Flutter and web development, and more recently,
+              AI automation: connecting Python, REST APIs, and platforms like
+              Make.com, n8n, GoHighLevel, and Vapi into workflows that qualify leads,
+              book appointments, and take repetitive work off people's plates.
             </p>
             <p>
-              Right now, most of my work centers on connecting Python, REST APIs, and
-              platforms like Make.com, n8n, GoHighLevel, and Vapi into intelligent
-              workflows, systems that qualify leads, book appointments, and take
-              repetitive work off people's plates. I like the problem that automation
-              solves: turning a process that used to need a person watching it into
-              one that just runs.
-            </p>
-            <p>
-              On the technical side, I work across Python, Flutter (Dart), C++, C#,
-              SQL, HTML, CSS, JavaScript, and even Assembly Language, a mix that's
-              given me a solid foundation for whatever a project needs, from a CRM
-              integration to a full website build.
-            </p>
-            <p>
-              I'm currently completing my BSCS, and alongside my coursework and
-              real-world projects, I've built up problem-solving skills, technical
-              confidence, and an eye for delivering things that actually work
-              reliably, not just in a demo. Long-term, I'm working toward full-stack
-              development, pairing the automation and backend work I do now with
-              stronger front-end range.
+              My stack includes Python, Flutter (Dart), C++, C#, SQL, HTML, CSS,
+              JavaScript, and Assembly Language. I'm completing my BSCS now, and
+              long-term I'm working toward full-stack development, pairing
+              automation and backend work with stronger front-end range.
             </p>
             <p>
               I'm open to internships, collaborations, and freelance work where I can
@@ -374,6 +366,7 @@ export default function App() {
       </section>
 
       <section className="section">
+        <SectionIndex number="06" />
         <Reveal><p className="section-eyebrow">Why work with me</p></Reveal>
         <Reveal delay={80}><h2>What you get when you hire me</h2></Reveal>
         <Reveal delay={110}>
@@ -392,6 +385,7 @@ export default function App() {
       </section>
 
       <section id="contact" className="section contact-page">
+        <SectionIndex number="07" />
         <Reveal><p className="section-eyebrow">Get in touch</p></Reveal>
         <Reveal delay={80}><h2>Let's build something that runs itself</h2></Reveal>
         <Reveal delay={120}>
@@ -411,7 +405,6 @@ export default function App() {
           ))}
         </div>
       </section>
-      <SpeedInsights />
     </>
   );
 }
