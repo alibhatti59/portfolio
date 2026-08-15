@@ -152,7 +152,7 @@ function NavBar() {
     <header className={`nav${scrolled ? ' scrolled' : ''}`}>
       <a href="#top" className="nav-brand" onClick={() => setMenuOpen(false)}>
         <img src={profilePic} alt="Ali Hassnain Bhatti" className="nav-avatar" />
-        <span className="nav-brand-text">Ali Bhatti</span>
+        <span className="nav-brand-text">Ali Hassnain Bhatti</span>
       </a>
       <nav className={`nav-links${menuOpen ? ' open' : ''}`}>
         {links.map((l) => (
@@ -246,12 +246,9 @@ export default function App() {
               <span className="tag">Python</span>
               <span className="tag">API</span>
               <span className="tag">LLM</span>
-              <span className="tag">CRM</span>
               <span className="tag">n8n</span>
-              <span className="tag">Make</span>
-              <span className="tag">Zapier</span>
-              <span className="tag">GoHighLevel</span>
-              <span className="tag">WordPress</span>
+              <span className="tag">Vapi</span>
+              <span className="tag">MCP</span>
             </div>
           </div>
         </div>
@@ -341,10 +338,11 @@ export default function App() {
               connect systems, and improve business efficiency.
             </p>
             <p>
-              I work with tools and technologies including Python, FastAPI, REST APIs, n8n,
-              Make, Zapier, webhooks, Vapi, CRM integrations, and AI agents to design reliable
-              automation workflows and backend systems. I also build responsive websites and
-              business solutions using WordPress, WooCommerce, HTML, CSS, and JavaScript.
+              I work with tools and technologies including Python, FastAPI, REST APIs,
+              n8n, Make, Zapier, webhooks, CRM integrations, and AI agents to design
+              reliable automation workflows and backend systems. I also build responsive
+              websites and business solutions using WordPress, WooCommerce, HTML, CSS,
+              and JavaScript.
             </p>
             <p>
               My stack includes Python, Flutter (Dart), C++, C#, SQL, HTML, CSS,
