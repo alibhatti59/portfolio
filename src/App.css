@@ -1774,6 +1774,7 @@ body.custom-cursor-active button {
   .hero-split {
     flex-direction: column;
     text-align: center;
+    padding-top: 6rem;
   }
 
   .hero-content > .hero-split > div:last-child {

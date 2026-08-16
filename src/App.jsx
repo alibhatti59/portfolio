@@ -246,9 +246,10 @@ export default function App() {
               <span className="tag">Python</span>
               <span className="tag">API</span>
               <span className="tag">LLM</span>
-              <span className="tag">n8n</span>
-              <span className="tag">Vapi</span>
-              <span className="tag">MCP</span>
+              <span className="tag">Automation</span>
+              <span className="tag">Workflows</span>
+              <span className="tag">CRM</span>
+              <span className="tag">WordPress</span>
             </div>
           </div>
         </div>
