@@ -23,6 +23,29 @@ const PipelineScene = lazy(() => import('./PipelineScene'));
 
 const AUTOMATION_WORK = [
   {
+    id: 'ai-frontdesk',
+    icon: 'saas',
+    node: 'Next.js + Retell AI',
+    title: 'AI FrontDesk: AI Voice Receptionist SaaS',
+    desc: 'A full commercial product, not just a demo. Businesses sign up, set their availability, and their AI receptionist starts answering calls and booking real appointments the same day, with live availability checking and a working Stripe subscription flow (test mode) showing exactly how billing would run in production.',
+    stack: ['Next.js', 'Retell AI', 'Supabase', 'Stripe'],
+    github: 'https://github.com/alibhatti59/ai-receptionist-saas',
+    demo: 'https://ai-frontdesk-byali.vercel.app/',
+    flow: ['Business Signup', 'Set Availability', 'Incoming Call', 'Retell AI Voice', 'Book Appointment', 'Stripe Billing'],
+    tradeoff: 'Built as a real multi-tenant product instead of a single-business script: each signup gets isolated data through Supabase, and the Stripe integration is a genuine subscription flow rather than a static pricing page, so it shows what actually shipping this to a paying customer looks like.',
+  },
+  {
+    id: 'rag-crm-agent',
+    icon: 'search',
+    node: 'Python + LangChain',
+    title: 'AI Support & Sales Agent: RAG + Live CRM Actions',
+    desc: 'An agentic support system that decides for itself whether a question needs document knowledge, a live CRM lookup, or just conversation. Document answers use hybrid search (vector plus BM25 keyword search) with citations, and the agent refuses to answer rather than guess when confidence is low. Deployed as a live Slack bot through n8n.',
+    stack: ['Python', 'LangChain', 'ChromaDB', 'Gemini', 'GoHighLevel'],
+    github: 'https://github.com/alibhatti59/ai-rag-crm-agent',
+    flow: ['Slack Message', 'Intent Classify', 'Hybrid Retrieval or CRM Lookup', 'Gemini + Citations', 'Auto-Tag Lead'],
+    tradeoff: 'Documented real evaluation results instead of just claiming it works: a 13-case test set shows 75% answer accuracy and 88% intent-classification accuracy, plus the known limitation that a single message combining two intents is not yet handled in parallel. Honest numbers over a demo that only shows the easy path.',
+  },
+  {
     id: 'voice-agent-booking',
     icon: 'phone',
     node: 'Vapi + n8n',
@@ -247,9 +270,9 @@ export default function App() {
               <span className="tag">API</span>
               <span className="tag">LLM</span>
               <span className="tag">Automation</span>
-              <span className="tag">Workflows</span>
+              <span className="tag">n8n</span>
               <span className="tag">CRM</span>
-              <span className="tag">WordPress</span>
+              <span className="tag">MCP</span>
             </div>
           </div>
         </div>

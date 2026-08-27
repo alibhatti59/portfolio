@@ -25,6 +25,20 @@ const ICONS = {
       <path d="M22 2l-7 20-4-9-9-4z" />
     </svg>
   ),
+  saas: (
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <path d="M2 9h20" />
+      <circle cx="5.5" cy="6.5" r="0.6" fill="currentColor" stroke="none" />
+      <circle cx="7.5" cy="6.5" r="0.6" fill="currentColor" stroke="none" />
+    </svg>
+  ),
+  search: (
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <circle cx="10.5" cy="10.5" r="6.5" />
+      <path d="M21 21l-4.35-4.35" strokeLinecap="round" />
+    </svg>
+  ),
 };
 
 function CircuitPattern({ id }) {
@@ -70,16 +84,23 @@ export default function ProjectCard({ w, isOpen, onToggle }) {
               <span className={`chevron${isOpen ? ' up' : ''}`}>›</span>
             </button>
           )}
-          {w.github && (
-            <a className="github-link" href={w.github} target="_blank" rel="noreferrer" data-cursor="CODE">
-              View on GitHub ↗
-            </a>
-          )}
+          <div className="card-links">
+            {w.demo && (
+              <a className="github-link demo-link" href={w.demo} target="_blank" rel="noreferrer" data-cursor="OPEN">
+                Live Demo ↗
+              </a>
+            )}
+            {w.github && (
+              <a className="github-link" href={w.github} target="_blank" rel="noreferrer" data-cursor="CODE">
+                View on GitHub ↗
+              </a>
+            )}
+          </div>
         </div>
         {w.flow && (
           <div className={`case-panel${isOpen ? ' open' : ''}`}>
             <div className="case-panel-inner">
-              {w.icon === 'phone' && <Waveform />}
+              {(w.icon === 'phone' || w.icon === 'saas') && <Waveform />}
               {w.icon === 'spark' && <ChatFlow />}
               <div className="flow-diagram">
                 {w.flow.map((step, i) => (
