@@ -79,7 +79,12 @@ export default function ProjectCard({ w, isOpen, onToggle }) {
         </div>
         <div className="card-actions">
           {w.flow && (
-            <button className="case-toggle" onClick={onToggle} aria-expanded={isOpen}>
+            <button
+              className="case-toggle"
+              onClick={onToggle}
+              aria-expanded={isOpen}
+              aria-controls={`case-panel-${w.id}`}
+            >
               {isOpen ? 'Close case study' : 'View case study'}
               <span className={`chevron${isOpen ? ' up' : ''}`}>›</span>
             </button>
@@ -98,7 +103,7 @@ export default function ProjectCard({ w, isOpen, onToggle }) {
           </div>
         </div>
         {w.flow && (
-          <div className={`case-panel${isOpen ? ' open' : ''}`}>
+          <div id={`case-panel-${w.id}`} className={`case-panel${isOpen ? ' open' : ''}`}>
             <div className="case-panel-inner">
               {(w.icon === 'phone' || w.icon === 'saas') && <Waveform />}
               {w.icon === 'spark' && <ChatFlow />}

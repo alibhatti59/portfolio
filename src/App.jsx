@@ -27,7 +27,7 @@ const AUTOMATION_WORK = [
     icon: 'saas',
     node: 'Next.js + Retell AI',
     title: 'AI FrontDesk: AI Voice Receptionist SaaS',
-    desc: 'A full commercial product, not just a demo. Businesses sign up, set their availability, and their AI receptionist starts answering calls and booking real appointments the same day, with live availability checking and a working Stripe subscription flow (test mode) showing exactly how billing would run in production.',
+    desc: 'A full commercial SaaS product, not a demo. Businesses sign up, set their availability, and their AI receptionist starts answering calls and booking real appointments the same day, with live Stripe billing.',
     stack: ['Next.js', 'Retell AI', 'Supabase', 'Stripe'],
     github: 'https://github.com/alibhatti59/ai-receptionist-saas',
     demo: 'https://ai-frontdesk-byali.vercel.app/',
@@ -39,7 +39,7 @@ const AUTOMATION_WORK = [
     icon: 'search',
     node: 'Python + LangChain',
     title: 'AI Support & Sales Agent: RAG + Live CRM Actions',
-    desc: 'An agentic support system that decides for itself whether a question needs document knowledge, a live CRM lookup, or just conversation. Document answers use hybrid search (vector plus BM25 keyword search) with citations, and the agent refuses to answer rather than guess when confidence is low. Deployed as a live Slack bot through n8n.',
+    desc: 'An agentic support system that decides whether a question needs document search, a live CRM lookup, or just conversation, answering with citations and refusing to guess when confidence is low. Live as a Slack bot.',
     stack: ['Python', 'LangChain', 'ChromaDB', 'Gemini', 'GoHighLevel'],
     github: 'https://github.com/alibhatti59/ai-rag-crm-agent',
     flow: ['Slack Message', 'Intent Classify', 'Hybrid Retrieval or CRM Lookup', 'Gemini + Citations', 'Auto-Tag Lead'],
@@ -50,7 +50,7 @@ const AUTOMATION_WORK = [
     icon: 'phone',
     node: 'Vapi + n8n',
     title: 'AI Voice Agent: Appointment Booking System',
-    desc: 'A fully automated AI voice agent that answers real phone calls, holds a natural conversation, and books real appointments directly to Google Calendar, no human involvement.',
+    desc: 'A fully automated AI voice agent that answers real phone calls and books real appointments directly to Google Calendar, no human involvement.',
     stack: ['Vapi', 'n8n', 'Python', 'FastAPI', 'Google Calendar API'],
     github: 'https://github.com/alibhatti59/voice-agent-booking-api',
     flow: ['Inbound Call', 'Vapi Voice AI', 'n8n Workflow', 'FastAPI Backend', 'Google Calendar'],
@@ -61,7 +61,7 @@ const AUTOMATION_WORK = [
     icon: 'spark',
     node: 'n8n + Gemini',
     title: 'AI Lead Qualification & Auto-Booking Agent',
-    desc: 'Instantly qualifies incoming leads and responds before they lose interest. Google Gemini reads each submission and scores it Hot, Warm, or Cold, hot leads get auto-booked against real calendar availability, warm and cold leads get a personalized follow-up email instead of silence.',
+    desc: 'Instantly qualifies incoming leads before they lose interest. Gemini scores each one Hot, Warm, or Cold, hot leads get auto-booked, warm and cold get a personalized follow-up instead of silence.',
     stack: ['n8n', 'Google Gemini', 'GoHighLevel'],
     github: 'https://github.com/alibhatti59/ai-lead-qualification-agent',
     flow: ['Form Submission', 'Gemini Scoring', 'Hot / Warm / Cold', 'Auto-Book or Follow-up', 'GHL CRM'],
@@ -174,7 +174,7 @@ function NavBar() {
   return (
     <header className={`nav${scrolled ? ' scrolled' : ''}`}>
       <a href="#top" className="nav-brand" onClick={() => setMenuOpen(false)}>
-        <img src={profilePic} alt="Ali Hassnain Bhatti" className="nav-avatar" />
+        <img src={profilePic} alt="" width="34" height="34" className="nav-avatar" />
         <span className="nav-brand-text">Ali Hassnain Bhatti</span>
       </a>
       <nav className={`nav-links${menuOpen ? ' open' : ''}`}>
@@ -237,203 +237,209 @@ export default function App() {
       <CustomCursor />
       <NavBar />
 
-      <section id="top" className="hero">
-        <div className="hero-canvas">
-          <Suspense fallback={<Preloader />}>
-            <ErrorBoundary>
-              <PipelineScene />
-            </ErrorBoundary>
-          </Suspense>
-        </div>
-        <div className="hero-content hero-split">
-          <div className="hero-photo-wrap">
-            <img src={profilePic} alt="Ali Hassnain Bhatti" className="hero-photo" />
-            <div className="hero-photo-glow" />
+      <main>
+        <section id="top" className="hero">
+          <div className="hero-canvas">
+            <Suspense fallback={<Preloader />}>
+              <ErrorBoundary>
+                <PipelineScene />
+              </ErrorBoundary>
+            </Suspense>
           </div>
-          <div>
-            <p className="eyebrow">AI Automation for Growing Businesses</p>
-            <h1>Ali Hassnain Bhatti</h1>
-            <p className="hero-hook">
-              I help businesses stop losing leads to slow follow-up and missed calls.
-            </p>
-            <p className="hero-sub">
-              I build AI voice agents and automations, GoHighLevel, Vapi, Make, n8n,
-              that answer every call and follow up with every lead, day or night.
-              Explore the work below or tell me what's eating your time.
-            </p>
-            <div className="hero-links">
-              <Magnetic><a href="#work" className="btn-primary" data-cursor="OPEN">See the work</a></Magnetic>
-              <Magnetic><a href="#contact" className="btn-ghost" data-cursor="OPEN" onClick={(e) => fireBurst(e.clientX, e.clientY)}>Start a project</a></Magnetic>
+          <div className="hero-content hero-split">
+            <div className="hero-photo-wrap">
+              <img src={profilePic} alt="Ali Hassnain Bhatti, AI Automation Engineer" width="168" height="168" className="hero-photo" fetchpriority="high" />
+              <div className="hero-photo-glow" />
             </div>
-            <div className="hero-core-caption">
-              <span className="tag">Python</span>
-              <span className="tag">API</span>
-              <span className="tag">LLM</span>
-              <span className="tag">Automation</span>
-              <span className="tag">n8n</span>
-              <span className="tag">CRM</span>
-              <span className="tag">MCP</span>
-            </div>
-          </div>
-        </div>
-        <div className="scroll-hint">scroll</div>
-      </section>
-
-      <section id="work" className="section">
-        <SectionIndex number="01" />
-        <Reveal><p className="section-eyebrow">Automation, the lead</p></Reveal>
-        <Reveal delay={80}><h2>Systems that run the pipeline</h2></Reveal>
-        <div className="work-grid">
-          {AUTOMATION_WORK.map((w, i) => (
-            <Reveal key={w.id} delay={i * 100}>
-              <ProjectCard w={w} isOpen={expanded === w.id} onToggle={() => toggle(w.id)} />
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="section">
-        <SectionIndex number="02" />
-        <Reveal><p className="section-eyebrow">Full-stack range</p></Reveal>
-        <Reveal delay={80}><h2>Beyond the pipeline</h2></Reveal>
-        <div className="work-grid">
-          {FULLSTACK_WORK.map((w, i) => (
-            <Reveal key={w.id} delay={i * 100}>
-              <ProjectCard w={w} isOpen={expanded === w.id} onToggle={() => toggle(w.id)} />
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="section">
-        <SectionIndex number="03" />
-        <Reveal><p className="section-eyebrow">Stack</p></Reveal>
-        <Reveal delay={80}><h2>What runs underneath</h2></Reveal>
-        <Reveal delay={100}>
-          <p className="hero-sub stack-intro">{STACK_INTRO}</p>
-        </Reveal>
-        <Reveal delay={140}>
-          <OrbitVisual />
-        </Reveal>
-        <div className="layers">
-          {STACK_LAYERS.map((l, i) => (
-            <Reveal key={l.layer} delay={i * 80}>
-              <div className="layer-row">
-                <span className="layer-name">
-                  <span className={`layer-icon icon-${l.icon}`} />
-                  {l.layer}
-                </span>
-                <div className="layer-items">
-                  {l.items.map((it) => <span className="tag" key={it}>{it}</span>)}
-                </div>
+            <div>
+              <p className="eyebrow">AI Automation for Growing Businesses</p>
+              <h1>Ali Hassnain Bhatti</h1>
+              <p className="hero-hook">
+                I help businesses stop losing leads to slow follow-up and missed calls.
+              </p>
+              <p className="hero-sub">
+                I build AI voice agents and automations, GoHighLevel, Vapi, Make, n8n,
+                that answer every call and follow up with every lead, day or night.
+                Explore the work below or tell me what's eating your time.
+              </p>
+              <div className="hero-links">
+                <Magnetic><a href="#work" className="btn-primary" data-cursor="OPEN">See the work</a></Magnetic>
+                <Magnetic><a href="#contact" className="btn-ghost" data-cursor="OPEN" onClick={(e) => fireBurst(e.clientX, e.clientY)}>Start a project</a></Magnetic>
               </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+              <div className="hero-core-caption">
+                <span className="tag">Python</span>
+                <span className="tag">API</span>
+                <span className="tag">LLM</span>
+                <span className="tag">Automation</span>
+                <span className="tag">Workflows</span>
+                <span className="tag">CRM</span>
+                <span className="tag">MCP</span>
+              </div>
+            </div>
+          </div>
+          <div className="scroll-hint">scroll</div>
+        </section>
 
-      <section className="section">
-        <SectionIndex number="04" />
-        <Reveal><p className="section-eyebrow">Journey</p></Reveal>
-        <Reveal delay={80}><h2>How I got to automation</h2></Reveal>
-        <div className="journey-path">
-          {JOURNEY.map((step, i) => (
-            <Reveal key={step.label} delay={i * 90} className="journey-step">
-              <span className={`journey-node${step.state === 'progress' ? ' journey-node-progress' : ''}`} />
-              <span className="journey-label">{step.label}</span>
-              {i < JOURNEY.length - 1 && <span className="journey-connector" />}
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section id="about" className="section about">
-        <SectionIndex number="05" />
-        <Reveal><p className="section-eyebrow">About</p></Reveal>
-        <Reveal delay={80}><h2>Practical digital solutions, built end to end</h2></Reveal>
-        <div className="about-layout">
-          <Reveal className="about-photo-reveal">
-            <img src={profilePic} alt="Ali Hassnain Bhatti" className="about-photo" />
-          </Reveal>
-          <Reveal delay={100} className="about-body">
-            <p>
-              I’m Ali Hassnain Bhatti, a Python Developer and AI Automation Specialist
-              focused on building practical digital solutions that automate processes,
-              connect systems, and improve business efficiency.
-            </p>
-            <p>
-              I work with tools and technologies including Python, FastAPI, REST APIs,
-              n8n, Make, Zapier, webhooks, CRM integrations, and AI agents to design
-              reliable automation workflows and backend systems. I also build responsive
-              websites and business solutions using WordPress, WooCommerce, HTML, CSS,
-              and JavaScript.
-            </p>
-            <p>
-              My stack includes Python, Flutter (Dart), C++, C#, SQL, HTML, CSS,
-              JavaScript, and Assembly Language. I'm completing my BSCS now, and
-              long-term I'm working toward full-stack development, pairing
-              automation and backend work with stronger front-end range.
-            </p>
-            <p>
-              I'm open to internships, collaborations, and freelance work where I can
-              learn, contribute, and build something that matters.
-            </p>
-          </Reveal>
-        </div>
-
-        <Reveal delay={150} className="cert-block">
-          <p className="section-eyebrow" style={{ marginTop: '3rem' }}>Certifications</p>
-          <ul className="cert-list">
-            {CERTIFICATIONS.map((c) => (
-              <li key={c.name}>
-                <span className="cert-name">{c.name}</span>
-                <span className="cert-issuer">{c.issuer}</span>
-              </li>
+        <section id="work" className="section">
+          <SectionIndex number="01" />
+          <Reveal><p className="section-eyebrow">Automation, the lead</p></Reveal>
+          <Reveal delay={80}><h2>Systems that run the pipeline</h2></Reveal>
+          <div className="work-grid">
+            {AUTOMATION_WORK.map((w, i) => (
+              <Reveal key={w.id} delay={i * 100}>
+                <ProjectCard w={w} isOpen={expanded === w.id} onToggle={() => toggle(w.id)} />
+              </Reveal>
             ))}
-          </ul>
-        </Reveal>
-      </section>
+          </div>
+        </section>
 
-      <section className="section">
-        <SectionIndex number="06" />
-        <Reveal><p className="section-eyebrow">Why work with me</p></Reveal>
-        <Reveal delay={80}><h2>What you get when you hire me</h2></Reveal>
-        <Reveal delay={110}>
-          <p className="hero-hook why-hook">
-            Your competitors respond to leads in minutes. If you're still doing it
-            manually, you're already behind.
-          </p>
-        </Reveal>
-        <div className="work-grid">
-          {WHY_ME.map((w, i) => (
-            <Reveal key={w.title} delay={i * 90 + 140}>
-              <FlipCard front={w.title} desc={w.desc} back={w.proof} />
-            </Reveal>
-          ))}
-        </div>
-      </section>
+        <section className="section">
+          <SectionIndex number="02" />
+          <Reveal><p className="section-eyebrow">Full-stack range</p></Reveal>
+          <Reveal delay={80}><h2>Beyond the pipeline</h2></Reveal>
+          <div className="work-grid">
+            {FULLSTACK_WORK.map((w, i) => (
+              <Reveal key={w.id} delay={i * 100}>
+                <ProjectCard w={w} isOpen={expanded === w.id} onToggle={() => toggle(w.id)} />
+              </Reveal>
+            ))}
+          </div>
+        </section>
 
-      <section id="contact" className="section contact-page">
-        <SectionIndex number="07" />
-        <Reveal><p className="section-eyebrow">Get in touch</p></Reveal>
-        <Reveal delay={80}><h2>Let's build something that runs itself</h2></Reveal>
-        <Reveal delay={120}>
-          <p className="hero-sub" style={{ marginBottom: '1rem' }}>
-            Open to internships, freelance work, and collaborations. Not sure what to
-            ask for? Start with: what's the one task you wish ran itself?
-          </p>
-          <p className="hero-sub" style={{ marginBottom: '3rem', opacity: 0.8 }}>
-            Typically replies within 24 hours.
-          </p>
-        </Reveal>
-        <div className="contact-grid">
-          {CONTACT_LINKS.map((l, i) => (
-            <Reveal key={l.label} delay={i * 60}>
-              <ContactIcon label={l.label} value={l.value} href={l.href} />
+        <section className="section">
+          <SectionIndex number="03" />
+          <Reveal><p className="section-eyebrow">Stack</p></Reveal>
+          <Reveal delay={80}><h2>What runs underneath</h2></Reveal>
+          <Reveal delay={100}>
+            <p className="hero-sub stack-intro">{STACK_INTRO}</p>
+          </Reveal>
+          <Reveal delay={140}>
+            <OrbitVisual />
+          </Reveal>
+          <div className="layers">
+            {STACK_LAYERS.map((l, i) => (
+              <Reveal key={l.layer} delay={i * 80}>
+                <div className="layer-row">
+                  <span className="layer-name">
+                    <span className={`layer-icon icon-${l.icon}`} />
+                    {l.layer}
+                  </span>
+                  <div className="layer-items">
+                    {l.items.map((it) => <span className="tag" key={it}>{it}</span>)}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        <section className="section">
+          <SectionIndex number="04" />
+          <Reveal><p className="section-eyebrow">Journey</p></Reveal>
+          <Reveal delay={80}><h2>How I got to automation</h2></Reveal>
+          <div className="journey-path">
+            {JOURNEY.map((step, i) => (
+              <Reveal key={step.label} delay={i * 90} className="journey-step">
+                <span className={`journey-node${step.state === 'progress' ? ' journey-node-progress' : ''}`} />
+                <span className="journey-label">{step.label}</span>
+                {i < JOURNEY.length - 1 && <span className="journey-connector" />}
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        <section id="about" className="section about">
+          <SectionIndex number="05" />
+          <Reveal><p className="section-eyebrow">About</p></Reveal>
+          <Reveal delay={80}><h2>Practical digital solutions, built end to end</h2></Reveal>
+          <div className="about-layout">
+            <Reveal className="about-photo-reveal">
+              <img src={profilePic} alt="" width="190" height="190" loading="lazy" className="about-photo" />
             </Reveal>
-          ))}
-        </div>
-      </section>
+            <Reveal delay={100} className="about-body">
+              <p>
+                I'm Ali Hassnain Bhatti, a Python Developer and AI Automation Specialist
+                focused on building practical digital solutions that automate processes,
+                connect systems, and improve business efficiency.
+              </p>
+              <p>
+                I work with tools and technologies including Python, FastAPI, REST APIs,
+                n8n, Make, Zapier, webhooks, CRM integrations, and AI agents to design
+                reliable automation workflows and backend systems. I also build responsive
+                websites and business solutions using WordPress, WooCommerce, HTML, CSS,
+                and JavaScript.
+              </p>
+              <p>
+                My stack includes Python, Flutter (Dart), C++, C#, SQL, HTML, CSS,
+                JavaScript, and Assembly Language. I'm completing my BSCS now, and
+                long-term I'm working toward full-stack development, pairing
+                automation and backend work with stronger front-end range.
+              </p>
+              <p>
+                I'm open to internships, collaborations, and freelance work where I can
+                learn, contribute, and build something that matters.
+              </p>
+            </Reveal>
+          </div>
+
+          <Reveal delay={150} className="cert-block">
+            <p className="section-eyebrow" style={{ marginTop: '3rem' }}>Certifications</p>
+            <ul className="cert-list">
+              {CERTIFICATIONS.map((c) => (
+                <li key={c.name}>
+                  <span className="cert-name">{c.name}</span>
+                  <span className="cert-issuer">{c.issuer}</span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </section>
+
+        <section className="section">
+          <SectionIndex number="06" />
+          <Reveal><p className="section-eyebrow">Why work with me</p></Reveal>
+          <Reveal delay={80}><h2>What you get when you hire me</h2></Reveal>
+          <Reveal delay={110}>
+            <p className="hero-hook why-hook">
+              Your competitors respond to leads in minutes. If you're still doing it
+              manually, you're already behind.
+            </p>
+          </Reveal>
+          <div className="work-grid">
+            {WHY_ME.map((w, i) => (
+              <Reveal key={w.title} delay={i * 90 + 140}>
+                <FlipCard front={w.title} desc={w.desc} back={w.proof} />
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        <section id="contact" className="section contact-page">
+          <SectionIndex number="07" />
+          <Reveal><p className="section-eyebrow">Get in touch</p></Reveal>
+          <Reveal delay={80}><h2>Let's build something that runs itself</h2></Reveal>
+          <Reveal delay={120}>
+            <p className="hero-sub" style={{ marginBottom: '1rem' }}>
+              Open to internships, freelance work, and collaborations. Not sure what to
+              ask for? Start with: what's the one task you wish ran itself?
+            </p>
+            <p className="hero-sub" style={{ marginBottom: '3rem', opacity: 0.8 }}>
+              Typically replies within 24 hours.
+            </p>
+          </Reveal>
+          <div className="contact-grid">
+            {CONTACT_LINKS.map((l, i) => (
+              <Reveal key={l.label} delay={i * 60}>
+                <ContactIcon label={l.label} value={l.value} href={l.href} />
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <footer className="site-footer">
+        <p>Ali Hassnain Bhatti, AI Automation Engineer. Built and maintained personally.</p>
+      </footer>
     </>
   );
 }
