@@ -23,6 +23,50 @@ const PipelineScene = lazy(() => import('./PipelineScene'));
 
 const AUTOMATION_WORK = [
   {
+    id: 'lenger-crm',
+    icon: 'split',
+    client: 'Lenger Financial Group',
+    sector: 'Real estate, Jacksonville FL',
+    title: 'One shared CRM split into three brand environments',
+    desc: 'Separated Door Realty, Homestead Development and Metropolitan Property Management into their own GoHighLevel sub-accounts, with calls, forms and chat routed to the right brand.',
+    stack: ['GoHighLevel', 'Vapi', 'Make.com', 'Voice AI', 'Conversation AI'],
+    stats: [
+      { value: '3', label: 'Brands separated' },
+      { value: '3', label: 'Lead channels rebuilt' },
+      { value: '3', label: 'Auth patterns audited' },
+      { value: '1', label: 'Maintenance runbook' },
+    ],
+    problem: {
+      title: 'A copied workflow is not an isolated workflow.',
+      body: 'The three brands originally shared one CRM. After separation, copied automations still pointed at the original account: calendars, pipeline stages, tags, custom fields, webhook URLs, app connections and API keys. A lead could look captured while landing in the wrong brand, the wrong pipeline, or nowhere.',
+    },
+    flow: ['Capture', 'Classify', 'Route', 'Follow up'],
+    tradeoff: 'Every asset had to belong to the correct destination account before live traffic was enabled, so ownership was verified first and activation came last.',
+    outcome: 'Each realistic test lead was followed to its contact record, opportunity, pipeline stage, notification and follow-up sequence across calls, forms and chat. Lenger now runs three dedicated CRM environments under one repeatable standard, with a runbook for future maintenance.',
+  },
+  {
+    id: 'apex-ghl',
+    icon: 'wrench',
+    client: 'Apex Cooling & Heating',
+    sector: 'HVAC and plumbing',
+    title: 'From missed calls to booked jobs',
+    desc: 'A GoHighLevel system that captures, triages and follows up every service inquiry, from first call through quote, review and recurring service.',
+    stack: ['GoHighLevel', 'Voice AI', 'Workflows', 'Pipelines', 'Calendars'],
+    stats: [
+      { value: '2', label: 'Revenue pipelines' },
+      { value: '3', label: 'Urgency routes' },
+      { value: '2', label: 'Booking calendars' },
+      { value: '3', label: 'Journeys tested' },
+    ],
+    problem: {
+      title: 'One inbox, three kinds of demand.',
+      body: 'Emergency calls, routine bookings and quote requests arrived with no consistent route. Missed callers went to voicemail, urgent and routine work got mixed, and quotes lost momentum after delivery with no review or maintenance follow-up.',
+    },
+    flow: ['Capture', 'Triage', 'Book', 'Follow up'],
+    tradeoff: 'Urgency became the first routing decision. Each contact then entered the right calendar, pipeline, tag and notification path.',
+    outcome: 'Quote recovery follows up at 2h, 24h and 72h and stops when the job is won. Review requests fire at Job Complete. Emergency, routine and quote-only journeys were tested end to end, with native Voice AI for intake and a dashboard for pipeline visibility.',
+  },
+  {
     id: 'ai-frontdesk',
     icon: 'saas',
     node: 'Next.js + Retell AI',
@@ -145,7 +189,7 @@ const CONTACT_LINKS = [
   { label: 'LinkedIn', value: 'linkedin.com/in/ali-hassnain-bhatti-1a0506312', href: 'https://www.linkedin.com/in/ali-hassnain-bhatti-1a0506312/' },
   { label: 'GitHub', value: 'github.com/alibhatti59', href: 'https://github.com/alibhatti59' },
   { label: 'YouTube', value: '@SmartUse_Tech_byAli', href: 'https://www.youtube.com/@SmartUse_Tech_byAli' },
-  { label: 'Facebook', value: 'facebook.com/alibhatti59dev', href: 'https://www.facebook.com/alibhatti59dev/' },
+  { label: 'Facebook', value: 'facebook.com/TheAliBhatti', href: 'https://www.facebook.com/TheAliBhatti' },
   { label: 'WhatsApp', value: '+92 317 7336159', href: 'https://wa.me/923177336159' },
 ];
 
@@ -273,7 +317,7 @@ export default function App() {
                 <span className="tag">Automation</span>
                 <span className="tag">Workflows</span>
                 <span className="tag">CRM</span>
-                <span className="tag">MCP</span>
+                <span className="tag">WordPress</span>
               </div>
             </div>
           </div>
@@ -438,7 +482,7 @@ export default function App() {
       </main>
 
       <footer className="site-footer">
-        <p>Ali Hassnain Bhatti, AI Automation Engineer. Built and maintained personally.</p>
+        <p>Ali Hassnain Bhatti, AI Automation Engineer. CRM & GHL Specialist.</p>
       </footer>
     </>
   );

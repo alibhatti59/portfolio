@@ -33,6 +33,20 @@ const ICONS = {
       <circle cx="7.5" cy="6.5" r="0.6" fill="currentColor" stroke="none" />
     </svg>
   ),
+  split: (
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <circle cx="5" cy="12" r="2.2" />
+      <circle cx="19" cy="5" r="2.2" />
+      <circle cx="19" cy="12" r="2.2" />
+      <circle cx="19" cy="19" r="2.2" />
+      <path d="M7.2 12h9.6M7 11l10-5M7 13l10 5" strokeLinecap="round" />
+    </svg>
+  ),
+  wrench: (
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <path d="M14.7 6.3a4 4 0 005 5l-1.4 1.4-2.1-.4-7.6 7.6a2 2 0 01-2.8-2.8l7.6-7.6-.4-2.1z" strokeLinejoin="round" />
+    </svg>
+  ),
   search: (
     <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="1.6">
       <circle cx="10.5" cy="10.5" r="6.5" />
@@ -71,9 +85,23 @@ export default function ProjectCard({ w, isOpen, onToggle }) {
         <span className="card-cover-icon">{ICONS[w.icon]}</span>
       </div>
       <div className="card-body">
-        {w.node && <span className="work-node">{w.node}</span>}
+        {w.client ? (
+          <span className="work-client">{w.client}{w.sector ? ` · ${w.sector}` : ''}</span>
+        ) : (
+          w.node && <span className="work-node">{w.node}</span>
+        )}
         <h3>{w.title}</h3>
         <p>{w.desc}</p>
+        {w.stats && (
+          <div className="case-stats">
+            {w.stats.map((st) => (
+              <div className="case-stat" key={st.label}>
+                <span className="case-stat-value">{st.value}</span>
+                <span className="case-stat-label">{st.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
         <div className="tag-row">
           {w.stack.map((s) => <span className="tag" key={s}>{s}</span>)}
         </div>
@@ -107,6 +135,13 @@ export default function ProjectCard({ w, isOpen, onToggle }) {
             <div className="case-panel-inner">
               {(w.icon === 'phone' || w.icon === 'saas') && <Waveform />}
               {w.icon === 'spark' && <ChatFlow />}
+              {w.problem && (
+                <div className="case-problem">
+                  <span className="case-label">The problem</span>
+                  <p className="case-problem-title">{w.problem.title}</p>
+                  <p className="case-problem-body">{w.problem.body}</p>
+                </div>
+              )}
               <div className="flow-diagram">
                 {w.flow.map((step, i) => (
                   <span className="flow-step" key={step}>
@@ -116,9 +151,15 @@ export default function ProjectCard({ w, isOpen, onToggle }) {
                 ))}
               </div>
               <p className="case-tradeoff">
-                <span className="case-label">Trade-off</span>
+                <span className="case-label">{w.problem ? 'Key decision' : 'Trade-off'}</span>
                 {w.tradeoff}
               </p>
+              {w.outcome && (
+                <p className="case-outcome">
+                  <span className="case-label">Outcome</span>
+                  {w.outcome}
+                </p>
+              )}
             </div>
           </div>
         )}
